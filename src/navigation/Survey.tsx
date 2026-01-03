@@ -4,17 +4,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Survey = ({ navigation }: any) => {
   const questions = [
-    "Why do you want to use mindleaf?",
+    "Why do you want to use stillmind?",
     "How old are you?",
     "How would you rate your mental health?",
     "How often do you journal?",
-    "How did you find about mindleaf?",
+    "How did you find about stillmind?",
   ];
 
   const options = [
     ["journal easily", "develop self-reflection habits", "improve mental health", "reduce stress or anxiety", "something else"],
     ["under 18", "18-24", "25-34", "34-55", "above 45"],
-    ["😟 very poor", "🙁 poor", "😕 average", "😕 good","😀 very good"],
+    ["😟 very poor", "🙁 poor", "😕 average", "😕 good", "😀 very good"],
     ["never", "1-2 times a week", "3-4 times a week", "5-6 times a week", "everyday"],
     ["instagram", "facebook", "google", "product hunt", "reddit", "friend"],
   ];
@@ -118,7 +118,7 @@ const Survey = ({ navigation }: any) => {
             placeholder="Please specify"
             value={otherText}
             onChangeText={(text) => setOtherText(text)}
-            
+
           />
         )}
       </View>
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   optionsContainer: {
     flex: 1,
     justifyContent: 'center',
-    
+
   },
   optionButton: {
     backgroundColor: '#FFF9EE',
