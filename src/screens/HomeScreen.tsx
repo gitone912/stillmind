@@ -22,12 +22,8 @@ type RootStackParamList = {
   Mind: undefined;
   Therapy: undefined;
   Mood: undefined;
-  Forum: undefined;
-  Void: undefined;
   Meditation: undefined;
   Courses: undefined;
-  Crisis: undefined;
-
 };
 
 // Define navigation prop type for HomeScreen
@@ -37,8 +33,8 @@ type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'HomeMai
 type Action = {
   id: string;
   title: string;
-  image: any; // Replace `any` with the correct type for your image assets if available
-  screen: keyof RootStackParamList; // This ensures `screen` is one of the keys in `RootStackParamList`
+  image: any;
+  screen: keyof RootStackParamList;
 };
 
 const HomeScreen = () => {
@@ -100,17 +96,23 @@ const HomeScreen = () => {
     fetchUserDataAndSaveToken();
   }, []);
 
+  const handlePlayGame = () => {
+    Alert.alert(
+      'Play Game',
+      'Game feature coming soon!',
+      [{ text: 'OK' }]
+    );
+  };
+
   const actions: Action[] = [
     { id: '1', title: 'Actions', image: require('../assets/home/actions.png'), screen: 'Action' },
     { id: '2', title: 'Insights', image: require('../assets/home/mind.png'), screen: 'Mind' },
     { id: '3', title: 'Therapy', image: require('../assets/home/therapy.png'), screen: 'Therapy' },
     { id: '4', title: 'Report', image: require('../assets/home/mood.png'), screen: 'Mood' },
-    { id: '5', title: 'Forum', image: require('../assets/home/forum.png'), screen: 'Forum' },
-    { id: '6', title: 'Void', image: require('../assets/home/void.png'), screen: 'Void' },
-    { id: '7', title: 'Meditation', image: require('../assets/home/meditation.png'), screen: 'Meditation' },
-    { id: '8', title: 'Courses', image: require('../assets/home/courses.png'), screen: 'Courses' },
-    { id: '9', title: 'Crisis', image: require('../assets/home/crisis.png'), screen: 'Crisis' }
+    { id: '5', title: 'Meditation', image: require('../assets/home/meditation.png'), screen: 'Meditation' },
+    { id: '6', title: 'Courses', image: require('../assets/home/courses.png'), screen: 'Courses' },
   ];
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.greeting}>
@@ -118,6 +120,12 @@ const HomeScreen = () => {
         <Text style={styles.title}>Hi, {userName}</Text>
         <Text style={styles.subtitle}>How is Your Mind Today?</Text>
       </View>
+
+      {/* Play Game Button */}
+      <TouchableOpacity style={styles.gameButton} onPress={handlePlayGame}>
+        <Text style={styles.gameButtonText}>I Want Help</Text>
+      </TouchableOpacity>
+
       <View style={styles.actionsContainer}>
         {actions.map((action) => (
           <TouchableOpacity
@@ -159,6 +167,25 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#A6A6A6',
     fontFamily: 'Inter-Regular',
+  },
+  gameButton: {
+    backgroundColor: '#dcbb4eff',
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 25,
+    marginHorizontal: 20,
+    marginBottom: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  gameButtonText: {
+    fontSize: 18,
+    fontFamily: 'Inter-Medium',
+    color: '#000',
   },
   actionsContainer: {
     flexDirection: 'row',
