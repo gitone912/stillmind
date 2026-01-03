@@ -4,6 +4,11 @@ const bodyParser = require('body-parser');
 const authRoutes = require('./routes/auth');
 const surveyRoutes = require('./routes/survey');
 const settingsRoutes = require('./routes/settings');
+const mindRoutes = require('./routes/mind');
+const tasksRoutes = require('./routes/tasks');
+const moodRoutes = require('./routes/mood');
+const notificationsRoutes = require('./routes/notifications');
+const journeyRoutes = require('./routes/journey');
 
 // Initialize database (creates tables if they don't exist)
 require('./database');
@@ -26,6 +31,11 @@ app.use((req, res, next) => {
 app.use('/', authRoutes);
 app.use('/', surveyRoutes);
 app.use('/', settingsRoutes);
+app.use('/', mindRoutes);
+app.use('/', tasksRoutes);
+app.use('/', moodRoutes);
+app.use('/', notificationsRoutes);
+app.use('/', journeyRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -47,7 +57,31 @@ app.get('/', (req, res) => {
                 'POST /v1/users/update-name'
             ],
             survey: ['POST /v1/surveys'],
-            settings: ['POST /v1/settings/update']
+            settings: ['POST /v1/settings/update'],
+            mind: [
+                'GET /v1/mind/all/:userId',
+                'POST /v1/mind/create'
+            ],
+            tasks: [
+                'POST /v1/tasks/create',
+                'PATCH /v1/tasks/complete/:taskId',
+                'POST /v1/tasks/today-tasks',
+                'PATCH /v1/tasks/reduce/:taskId',
+                'DELETE /v1/tasks/delete/:taskId'
+            ],
+            mood: [
+                'GET /v1/mood/:userId',
+                'POST /v1/mood/save',
+                'GET /v1/frequent-words/:userId',
+                'POST /v1/frequent-words/update'
+            ],
+            notifications: [
+                'POST /v1/notifications/save-token',
+                'GET /v1/notifications/tokens/:userId'
+            ],
+            journey: [
+                'GET /v1/journey/streak/:userId'
+            ]
         }
     });
 });

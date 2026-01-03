@@ -64,6 +64,80 @@ db.exec(`
   )
 `);
 
+// Create mind/journal entries table
+db.exec(`
+  CREATE TABLE IF NOT EXISTS mind_entries (
+    mind_id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL,
+    title TEXT NOT NULL,
+    insight TEXT NOT NULL,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+  )
+`);
+
+// Create tasks table
+db.exec(`
+  CREATE TABLE IF NOT EXISTS tasks (
+    task_id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL,
+    task_name TEXT NOT NULL,
+    is_completed INTEGER DEFAULT 0,
+    completed_at TEXT,
+    completion_points INTEGER DEFAULT 0,
+    date TEXT NOT NULL,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+  )
+`);
+
+// Create mood data table
+db.exec(`
+  CREATE TABLE IF NOT EXISTS mood_data (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id TEXT NOT NULL,
+    day TEXT NOT NULL,
+    value INTEGER NOT NULL,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+  )
+`);
+
+// Create frequent words table
+db.exec(`
+  CREATE TABLE IF NOT EXISTS frequent_words (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id TEXT UNIQUE NOT NULL,
+    frequent_words TEXT NOT NULL,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+  )
+`);
+
+// Create FCM tokens table
+db.exec(`
+  CREATE TABLE IF NOT EXISTS fcm_tokens (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id TEXT NOT NULL,
+    fcm_token TEXT NOT NULL,
+    name TEXT,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+  )
+`);
+
+// Create journey streak table
+db.exec(`
+  CREATE TABLE IF NOT EXISTS journey_streak (
+    user_id TEXT PRIMARY KEY,
+    streak INTEGER DEFAULT 0,
+    last_updated TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+  )
+`);
+
 console.log('Database initialized successfully');
 
 module.exports = db;
