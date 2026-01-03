@@ -7,7 +7,7 @@ const AskNotification = ({ navigation, route }: any) => {
   const [selectedDays, setSelectedDays] = React.useState<string[]>([]);
   const [selectedTime, setSelectedTime] = React.useState("9:00 PM");
   const [showTimePicker, setShowTimePicker] = React.useState(false);
-  
+
 
   const toggleDay = (day: string) => {
     setSelectedDays((prevDays) =>
@@ -57,7 +57,7 @@ const AskNotification = ({ navigation, route }: any) => {
       <View style={styles.notificationBox}>
         <Image style={styles.logo} source={require("../assets/mindnote-logo.png")} />
         <View>
-          <Text style={styles.notificationTitle}>Mindleaf</Text>
+          <Text style={styles.notificationTitle}>stillmind</Text>
           <Text style={styles.notificationMessage}>John, it's time to reflect about your day.</Text>
         </View>
       </View>
@@ -65,23 +65,23 @@ const AskNotification = ({ navigation, route }: any) => {
       <Text style={styles.subHeading}>Notify me on</Text>
 
       <View style={styles.daysContainer}>
-  {days.map((day, index) => (
-    <TouchableOpacity
-      key={index}
-      style={[styles.dayCircle, selectedDays.includes(day) && styles.daySelected]}
-      onPress={() => toggleDay(day)}
-    >
-      <Text
-        style={[
-          styles.dayText,
-          selectedDays.includes(day) && { color: "#fff" }, // Change text color for selected days
-        ]}
-      >
-        {day}
-      </Text>
-    </TouchableOpacity>
-  ))}
-</View>
+        {days.map((day, index) => (
+          <TouchableOpacity
+            key={index}
+            style={[styles.dayCircle, selectedDays.includes(day) && styles.daySelected]}
+            onPress={() => toggleDay(day)}
+          >
+            <Text
+              style={[
+                styles.dayText,
+                selectedDays.includes(day) && { color: "#fff" }, // Change text color for selected days
+              ]}
+            >
+              {day}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
 
 
       <Text style={styles.subHeading}>at</Text>

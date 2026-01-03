@@ -12,7 +12,7 @@ const HIW2 = ({ navigation }: any) => {
 
       {/* Subtitle */}
       <Text style={styles.subHeader}>
-        Mindleaf intelligently converts the session into a journal entry.
+        stillmind intelligently converts the session into a journal entry.
       </Text>
 
       {/* Content Image */}
